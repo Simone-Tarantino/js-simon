@@ -20,11 +20,18 @@ while (l < 5) {
 alert('I numeri da memorizzare sono ' + memoryList + '. Hai 30 secondi per memorizzarli.');
 // timer 30 secondi
 var num = setTimeout(function () {
-  for (var i = 0; i < 5; i++) {
+  var n = 0;
+  while (n < 5) {
     var numUser = parseInt(prompt('Inserisci un numero presente nella lista'));
-    var userInArray = isInArray(memoryList, numUser);
-    if (userInArray == true) {
-      userNumbers.push(numUser);
+    var userInUserNum = isInArray(userNumbers, numUser);
+    if (userInUserNum == false) {
+      var userInArray = isInArray(memoryList, numUser);
+      if (userInArray == true) {
+        userNumbers.push(numUser);
+      }
+      n++;
+    } else {
+      alert('Hai già inserito questo numero, inseriscine un altro');
     }
   }
   alert('Hai inserito ' + (userNumbers.length) + ' numeri corretti. I numeri sono ' + userNumbers + '.');
