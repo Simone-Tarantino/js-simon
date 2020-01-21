@@ -3,15 +3,34 @@
 // Dopo 30 secondi l'utente deve inserire un prompt alla volta i numeri che ha visto precedentemente.
 // Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati
 
-var memoryList = [1, 2, 3, 5];
-//
-// for (var i = 0; i < 5; i++) {
-//   var randomNum = genRandomNum(1, 10);
-//   memoryList.push(randomNum);
-// }
+var memoryList = [];
+var userNumbers = [];
 
-var trovato = isInArray(memoryList, 4);
-console.log(trovato);
+// generiamo 5 numeri random tutti differenti
+var l = 0;
+while (l < 5) {
+  var randomNum = genRandomNum(1, 10);
+  var randomInArray = isInArray(memoryList, randomNum);
+  if (randomInArray == false){
+    memoryList.push(randomNum);
+    l++;
+  }
+}
+// avviso per l'utente
+alert('I numeri da memorizzare sono ' + memoryList + '. Hai 30 secondi per memorizzarli.');
+// timer 30 secondi
+var num = setTimeout(function () {
+  for (var i = 0; i < 5; i++) {
+    var numUser = parseInt(prompt('Inserisci un numero presente nella lista'));
+    var userInArray = isInArray(memoryList, numUser);
+    if (userInArray == true) {
+      userNumbers.push(numUser);
+    }
+  }
+  alert('Hai inserito ' + (userNumbers.length) + ' numeri corretti. I numeri sono ' + userNumbers + '.');
+}, 3000);
+
+
 
 // funzione per numero random
 function genRandomNum(min, max) {
